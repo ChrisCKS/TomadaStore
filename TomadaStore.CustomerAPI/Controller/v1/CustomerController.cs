@@ -44,6 +44,7 @@ namespace TomadaStore.CustomerAPI.Controller.v1
             try
             {
                 _logger.LogInformation("Retrieving all customers."); //mostra no terminal
+
                 var customers = await _customerService.GetAllCustomersAsync();
                 return Ok(customers);
             }
