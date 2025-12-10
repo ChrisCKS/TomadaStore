@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TomadaStore.SaleAPI.Model;
-using TomadaStore.SaleAPI.Service.Interface;
+using TomadaStore.SaleAPI.Service.v1.Interface;
 
 namespace TomadaStore.SaleAPI.Controller.v1
 {
@@ -18,12 +18,12 @@ namespace TomadaStore.SaleAPI.Controller.v1
             _saleService = saleService;
         }
 
-        [HttpPost("customer/{idCustomer}/product/{idProduct}")]
-        public async Task<IActionResult> CreateSaleAsync(int idCustomer, string idProduct, [FromBody] SaleRequestDTO saleDTO)
+        [HttpPost("customer/{idCustomer}")]
+        public async Task<IActionResult> CreateSaleAsync(int idCustomer, [FromBody] SaleRequestDTO saleDTO)
         {
             _logger.LogInformation("Creating a new sale.");
     
-            await  _saleService.CreateSaleAsync(idCustomer, idProduct, saleDTO);
+            await  _saleService.CreateSaleAsync(idCustomer, saleDTO);
             return Ok();
         }
     }

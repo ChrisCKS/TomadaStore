@@ -48,7 +48,7 @@ namespace TomadaStore.ProductAPI.Repository
         public async Task<ProductResponseDTO> GetProductByIdAsync(string id)
         {
             try
-            {
+            {                                               //procure na coleção um produto 'p' onde o Id desse 'p' seja igual ao ID que eu te passei."
                 var products = await _mongoCollection.FindAsync(p => p.Id == ObjectId.Parse(id));
                 var product = products.FirstOrDefault();
 

@@ -21,44 +21,42 @@ namespace TomadaStore.SaleAPI.Repository
             _mongoCollection = _connection.GetMongoCollection();
         }
 
-        public async Task CreateSaleAsync(CustomerResponseDTO customerDTO, ProductResponseDTO productDTO, SaleRequestDTO sale)
+        public async Task CreateSaleAsync(CustomerResponseDTO customerDTO, List<ProductResponseDTO> productsDTO, decimal totalPrice)    /**/
         {
             try
             {
-                var products = new List<Product>();
-
-                var category = new Category
-                (
-                    productDTO.Category.Id,
-                    productDTO.Category.Name,
-                    productDTO.Category.Description
-                );
-
-                var product = new Product
-                    (
-                        productDTO.Id,
-                        productDTO.Name,
-                        productDTO.Description,
-                        productDTO.Price,
-                        category
-                    );
-
-                products.Add(product);
-
                 var customer = new Customer
-                (
-                    customerDTO.Id,
-                    customerDTO.FirstName,
-                    customerDTO.LastName,
+                (                                                           
+                    customerDTO.FirstName,                                                                                 
+                    customerDTO.LastName,   
                     customerDTO.Email,
-                    customerDTO.PhoneNumber
+                    customerDTO.Status
                 );
 
-                await _mongoCollection.InsertOneAsync(new Sale
-                (
-                    customer, products, productDTO.Price
-                ));
+                var listProducts = new List<Product>();
 
+                foreach (var pDTO in productsDTO)
+                {
+                    var category = new Category
+                    (
+                        pDTO.Category.Id,
+                        pDTO.Category.Name,
+                        pDTO.Category.Description
+                    );
+                    var product = new Product
+                        (
+                            pDTO.Id,
+                            pDTO.Name,
+                            pDTO.Description,
+                            pDTO.Price,
+                            category
+                        );
+                    listProducts.Add(product);
+                }
+
+                var sale = new Sale(customer, listProducts, totalPrice);
+
+                await _mongoCollection.InsertOneAsync(sale);                                                        /**/
             }
             catch (Exception ex)
             {

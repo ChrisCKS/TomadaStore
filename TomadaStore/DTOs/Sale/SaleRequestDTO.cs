@@ -2,5 +2,6 @@
 {
     public class SaleRequestDTO
     {
+        public List <string> ProductsIds { get; set; }
     }
 }

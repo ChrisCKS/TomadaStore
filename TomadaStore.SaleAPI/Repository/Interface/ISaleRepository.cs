@@ -6,8 +6,6 @@ namespace TomadaStore.SaleAPI.Repository.Interface
 {
     public interface ISaleRepository
     {
-        Task CreateSaleAsync(CustomerResponseDTO customer,
-                            ProductResponseDTO product,
-                            SaleRequestDTO sale);
+        Task CreateSaleAsync(CustomerResponseDTO customer, List<ProductResponseDTO> products, decimal totalPrice);
     }
 }

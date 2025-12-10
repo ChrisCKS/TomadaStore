@@ -14,6 +14,9 @@ namespace TomadaStore.Models.Models
         public DateTime SaleDate { get; private set; }
         public decimal TotalPrice  { get; private set; }
 
+
+        public Sale() { }
+
         public Sale(Customer customer, List<Product> products, decimal totalPrice)
         {
             Customer = customer;

@@ -26,13 +26,15 @@
                         string firstName,
                         string lastName,
                         string email,
-                        string? phoneNumber)
+                        string? phoneNumber,
+                        bool status)
         {
             Id = id;
             FirstName = firstName;
             LastName = lastName;
             Email = email;
             PhoneNumber = phoneNumber;
+            Status = status;
         }
     }
 }
