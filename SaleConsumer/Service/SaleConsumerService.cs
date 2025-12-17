@@ -3,7 +3,6 @@ using RabbitMQ.Client.Events;
 using System.Text;
 using System.Text.Json;
 using TomadaStore.Models.DTOs.Payment;
-using TomadaStore.Models.Models;
 
 namespace SaleConsumer.Service
 {
@@ -12,8 +11,6 @@ namespace SaleConsumer.Service
         private readonly ILogger<SaleConsumerService> _logger;
         //private readonly IHttpClientFactory _httpClientFactory;
         private readonly ConnectionFactory _connectionFactory;
-
-        private const string QUEUE_NAME = "saleQueue";
 
         public SaleConsumerService(ILogger<SaleConsumerService> logger)
         {
@@ -27,7 +24,6 @@ namespace SaleConsumer.Service
                 Password = "guest"
             };
         }
-
 
         public async Task SaleConsumerAsync()
         {
